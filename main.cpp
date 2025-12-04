@@ -119,16 +119,18 @@ void printPath(pair<int,int> exitcell,
 // ----------------------------------------------------------
  bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int end_r, int end_c) {
 
+int N = maze.size();
+int M = maze[0].size();
+
+if (r == end_r && c == end_c) {
+return true;}
+
+if (r <0 || r >= N || c <0 || c >= M) {
+return false;}
+
 if (maze[r][c] == 1) {
-maze[r][c] = 0;
-parent_r[r][c] = parent_c[r][c];
-parent_c[r][c] = parent_r[r][c];
-return 1;
-} else {
-maze[r][c] = 1;
-parent_r[r][c] = parent_c[r][c];
-parent_c[r][c] = parent_r[r][c];
-return 0;
+return false;}
+
 
  }
 
