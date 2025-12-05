@@ -117,33 +117,38 @@ void printPath(pair<int,int> exitcell,
 // STUDENTS IMPLEMENT DFS HERE
 // Add arguments, return type, and logic
 // ----------------------------------------------------------
- bool dfs(int r, int c, const vector<vector<int>>& maze, vector<vector<bool>>& visited, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int exit_r, int exit_c ) {
+ bool dfs(int ent_r, int ent_c, const vector<vector<int>>& maze, vector<vector<bool>>& visited, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int exit_r, int exit_c ) {
 
+    // sets N and M to the size of the maze
     int N = maze.size();
     int M = maze[0].size();
 
-
-
-    if (r <0 || r >= N || c <0 || c >= M) {
+    // Checks the bounds of the maze
+    if (ent_r <0 || ent_r >= N || ent_c <0 || ent_c >= M) {
         return false;}
 
-    if (maze[r][c] == 1) {
+    // checks if there is a "wall"
+    if (maze[ent_r][ent_c] == 1) {
         return false;}
 
-    if (visited[r][c]) {
+    // checks if that node has bee visted already
+    if (visited[ent_r][ent_c]) {
         return false;}
 
-    visited[r][c] = true;
+    // sets the node to visited after it has been visted
+    visited[ent_r][ent_c] = true;
 
-    if (r == exit_r && c == exit_c) {
+    // if the coordinates of the exit match the one that is currently being visited then returns true
+    if (ent_r == exit_r && ent_c == exit_c) {
         return true;}
 
+    // checks each of the neighbors next to the node that is being currently visited
     for (int i = 0; i < 4; i++) {
-        int nr = r + dr[i];
-        int nc = c + dc[i];
+        int nr = ent_r + dr[i];
+        int nc = ent_c + dc[i];
         if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
-            parent_r[nr][nc] = r;
-            parent_c[nr][nc] = c;
+            parent_r[nr][nc] = ent_r;
+            parent_c[nr][nc] = ent_c;
             return true;
         }
     }
